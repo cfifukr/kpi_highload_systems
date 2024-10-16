@@ -1,0 +1,16 @@
+<hazelcast>
+    <network>
+        <join>
+            <multicast enabled="false"/>
+            <tcp-ip enabled="true">
+                <member>127.0.0.1:5701</member>
+                <member>127.0.0.1:5702</member>
+                <member>127.0.0.1:5703</member>
+            </tcp-ip>
+        </join>
+    </network>
+    <cp-subsystem>
+        <cp-member-count>3</cp-member-count>
+    </cp-subsystem>
+
+</hazelcast>
