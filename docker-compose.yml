@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  mongo-primary:
+    image: mongo:latest
+    container_name: mongo-primary
+    ports:
+      - 27017:27017
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    volumes:
+      - mongo-data-primary:/data/db
+
+  mongo-secondary1:
+    image: mongo:latest
+    container_name: mongo-secondary1
+    ports:
+      - 27018:27017
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    volumes:
+      - mongo-data-secondary1:/data/db
+
+  mongo-secondary2:
+    image: mongo:latest
+    container_name: mongo-secondary2
+    ports:
+      - 27019:27017
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    volumes:
+      - mongo-data-secondary2:/data/db
+
+
+
+volumes:
+  mongo-data-primary:
+  mongo-data-secondary1:
+  mongo-data-secondary2:
