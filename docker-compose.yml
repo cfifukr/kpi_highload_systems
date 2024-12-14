@@ -1,0 +1,52 @@
+version: '3.9'
+
+services:
+  cassandra-node1:
+    image: cassandra:latest
+    hostname: cassandra-node1
+    container_name: cassandra-node1
+    environment:
+      - JVM_OPTS="-Xms1g -Xmx1g"
+      - CASSANDRA_SEEDS=cassandra-node1
+      - CASSANDRA_CLUSTER_NAME=CassandraCluster
+      - CASSANDRA_DC=datacenter1
+      - CASSANDRA_ENDPOINT_SNITCH=SimpleSnitch
+    ports:
+      - "9042:9042"
+    networks:
+      - cassandra-network
+
+  cassandra-node2:
+    image: cassandra:latest
+    hostname: cassandra-node2
+    container_name: cassandra-node2
+    environment:
+      - JVM_OPTS="-Xms1g -Xmx1g"
+
+      - CASSANDRA_SEEDS=cassandra-node1
+      - CASSANDRA_CLUSTER_NAME=CassandraCluster
+      - CASSANDRA_DC=datacenter1
+      - CASSANDRA_ENDPOINT_SNITCH=SimpleSnitch
+    ports:
+      - "9043:9042"
+    networks:
+      - cassandra-network
+
+  cassandra-node3:
+    image: cassandra:latest
+    hostname: cassandra-node3
+    container_name: cassandra-node3
+    environment:
+      - JVM_OPTS="-Xms1g -Xmx1g"
+      - CASSANDRA_SEEDS=cassandra-node1
+      - CASSANDRA_CLUSTER_NAME=CassandraCluster
+      - CASSANDRA_DC=datacenter1
+      - CASSANDRA_ENDPOINT_SNITCH=SimpleSnitch
+    ports:
+      - "9044:9042"
+    networks:
+      - cassandra-network
+
+networks:
+  cassandra-network:
+    driver: bridge
